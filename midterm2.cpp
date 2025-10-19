@@ -342,12 +342,15 @@ int main() {
     // call print
     line.print();
 
+    // two things for me were unclear, the order of operations was not specified, and if I can make more than one person leave per time stamp
+    // I decided to do the method where it gives each person in line a 10% chance to leave at any given time period
+     
     // lets loop for 20 time stamps (starting at minute 2 and going to minute 20 as shown in the example)
     for (int min = 2; min <= 20; min++){
         // output what time step we are on
         cout << "Time step #" << min << ":" << endl;
 
-        // VIP gets prio so I should start with that actually
+        // VIP gets prio so I should start with that actually 
         int chance = rand() % MAX + MIN;
         if(chance <= VIP){
             // they insta go to the front of the line
