@@ -185,14 +185,17 @@ public:
             delete temp;
         }
     }
+
+    // gotta change the print function to match the example
     void print() {
         Node* current = head;
         if (!current) {
-            cout << "List is empty." << endl;
+            cout << "Line is empty." << endl;
             return;
         }
+        cout << "\tResulting line:" << endl;
         while (current) {
-            cout << current->data << " ";
+            cout << "\t" << current->data << endl;
             current = current->next;
         }
         cout << endl;
@@ -224,7 +227,7 @@ vector<string> names(){
     // check if the file was found first
     if(!file){
         cout << "Error: File could not be opened";
-        return;
+        return names;
     }
 
     // Loop through and get names
@@ -265,6 +268,22 @@ int main() {
     // create a doubly linked list for the line
     DoublyLinkedList line;
 
-    
+    // since the names are in a random order imma create an index tracker for when i need to get names so I dont get repeats
+    int index = 0;
+    // store opens add 5 people
+    cout << "Store opens:" << endl;
+    for (int i = 0; i < 5; i++){
+        // get a name from the list
+        string name = nameList[index];
+        index++; // add to the index
+
+        // add the chosen name to the line
+        line.push_back(name);
+        // display
+        cout << "\t" << name << " joins the line" << endl;
+    }
+    // call print
+    line.print();
+
     return 0;
 }
