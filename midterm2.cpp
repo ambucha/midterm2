@@ -313,12 +313,23 @@ int main() {
     line.print();
 
     // lets loop for 20 time stamps (starting at minute 2 and going to minute 20 as shown in the example)
-    for (int min = 2; min =< 20; min++){
+    for (int min = 2; min <= 20; min++){
         // output what time step we are on
         cout << "Time step #" << min << ":" << endl;
 
-        // check if someone was served, 40% chance of this also create the chance variable for our probability checking
+        // VIP gets prio so I should start with that actually
         int chance = rand() % MAX + MIN;
+        if(chance <= VIP){
+            // they insta go to the front of the line
+            line.push_front(nameList[index]);
+            index++;
+
+            // display
+            cout << "\t" << line.front_val() << " (VIP) joins the front of the line" << endl;
+        }
+
+        // check if someone was served, 40% chance of this also create the chance variable for our probability checking
+        chance = rand() % MAX + MIN;
         if(chance <= SERVED){
             // i needa make a function to get the front person and back persons name to display
             cout << "\t" << line.front_val() << " is served" << endl;
@@ -333,6 +344,20 @@ int main() {
 
             // call the back_val function to get the new person who joined
             cout << "\t" << line.back_val() << " joins the line" << endl;
+        }
+
+        // check if someone at the end wants to leave
+        chance = rand() % MAX + MIN;
+        if(chance <= END_LEAVE){
+            cout << "\t" << line.back_val() << "(at the rear) left the line" << endl;
+            // eliminate the person at the back
+            line.pop_back();
+        }
+
+        // nested for function to loop through the list and check if each person wants to leave
+        // imma use a cheeky for auto loop here I feel like i use for(i < 0...)
+        for(auto p : nameList){
+            
         }
     }
     return 0;
