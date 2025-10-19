@@ -237,6 +237,27 @@ public:
         // if not empty return the string at the back
         return tail->data;
     }
+
+    // to_vec(): gives me the linked list as a vector
+    // arguemnts: nothing
+    // returns: vector
+    vector<string> to_vec(){
+        // walk from the head to the tail and input value into a vector
+        Node* current = head;
+        vector<string> list;
+
+        // check if list is empty
+        if(!head){
+            return list;
+        }
+        // walk through the list and make a vector
+        while (current) {
+            list.push_back(current->data);
+            current = current->next;
+        }
+
+        return list;
+    }
 };
 
 // names(): Start with a function to load names in from my given file
@@ -349,14 +370,15 @@ int main() {
         // check if someone at the end wants to leave
         chance = rand() % MAX + MIN;
         if(chance <= END_LEAVE){
-            cout << "\t" << line.back_val() << "(at the rear) left the line" << endl;
+            cout << "\t" << line.back_val() << " (at the rear) left the line" << endl;
             // eliminate the person at the back
             line.pop_back();
         }
 
         // nested for function to loop through the list and check if each person wants to leave
-        // imma use a cheeky for auto loop here I feel like i use for(i < 0...)
-        for(auto p : nameList){
+        // i need to get the linked list into a vector so i can sort through each person and check if they want to leave
+        vector<string> currentLine = line.to_vec();
+        for(auto p : currentLine){
             chance = rand() % MAX + MIN;
             if(chance <= ANY_LEAVE){
                 cout << "\t" << p << " left the line" << endl;
