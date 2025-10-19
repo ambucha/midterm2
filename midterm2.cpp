@@ -14,10 +14,11 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        // change data type to string (just realized I gotta go through every function and change the int to string)
+        string data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(string val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
             next = n;
@@ -30,7 +31,7 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void insert_after(int value, int position) {
+    void insert_after(string value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -61,7 +62,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_val(int value) {
+    void delete_val(string value) {
         if (!head) return;
 
         Node* temp = head;
@@ -121,7 +122,7 @@ public:
         delete temp;
     }
 
-    void push_back(int v) {
+    void push_back(string v) {
         Node* newNode = new Node(v);
         if (!tail)
             head = tail = newNode;
@@ -132,7 +133,7 @@ public:
         }
     }
     
-    void push_front(int v) {
+    void push_front(string v) {
         Node* newNode = new Node(v);
         if (!head)
             head = tail = newNode;
@@ -209,6 +210,7 @@ public:
         }
         cout << endl;
     }
+ 
 };
 
 // names(): Start with a function to load names in from my given file
@@ -233,10 +235,36 @@ vector<string> names(){
         }
     }
 
+    // wait i still needa randomize now
+    for(int i = 0; i < names.size();i++){
+        // pick a random position
+        int randI = rand() % names.size();
+
+        // every day Im shuffling doo doo doo doo (shuffle the positions around to make it random)
+        string temp = names[i];
+        names[i] = names[randI];
+        names[randI] = temp;
+    }
+
     return names;
 }
 
 int main() {
+    // seed the random
     srand(time(0));
+
+    // set variabels for the probabilities given
+    const int SERVED = 40;
+    const int JOIN = 60;
+    const int END_LEAVE = 20;
+    const int ANY_LEAVE = 10;
+    const int VIP = 10;
+
+    // load in the names
+    vector<string> nameList = names();
+    // create a doubly linked list for the line
+    DoublyLinkedList line;
+
+    
     return 0;
 }
