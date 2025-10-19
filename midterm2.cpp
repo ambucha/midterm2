@@ -213,7 +213,8 @@ public:
         }
         cout << endl;
     }
- 
+
+    // front_val():
 };
 
 // names(): Start with a function to load names in from my given file
@@ -263,6 +264,10 @@ int main() {
     const int ANY_LEAVE = 10;
     const int VIP = 10;
 
+    // create values for getting a number from 100 to 1
+    const int MAX = 100;
+    const int MIN = 1;
+
     // load in the names
     vector<string> nameList = names();
     // create a doubly linked list for the line
@@ -285,5 +290,16 @@ int main() {
     // call print
     line.print();
 
+    // lets loop for 20 time stamps (starting at minute 2 and going to minute 20 as shown in the example)
+    for (int min = 2; min =< 20; min++){
+        // output what time step we are on
+        cout << "Time step #" << min << ":" << endl;
+
+        // check if someone was served, 40% chance of this also create the chance variable for our probability checking
+        int chance = rand() % MAX + MIN;
+        if(chance <= SERVED){
+            // i needa make a function to get the front person and back persons name to display
+        }
+    }
     return 0;
 }
