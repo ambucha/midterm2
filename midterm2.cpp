@@ -357,8 +357,16 @@ int main() {
         // nested for function to loop through the list and check if each person wants to leave
         // imma use a cheeky for auto loop here I feel like i use for(i < 0...)
         for(auto p : nameList){
-            
+            chance = rand() % MAX + MIN;
+            if(chance <= ANY_LEAVE){
+                cout << "\t" << p << " left the line" << endl;
+
+                // get rid of the person in the linked list
+                line.delete_val(p);
+            }
         }
+        // print at the end of each interval
+        line.print();
     }
     return 0;
 }
