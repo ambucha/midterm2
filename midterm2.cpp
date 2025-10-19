@@ -188,14 +188,14 @@ public:
 
     // gotta change the print function to match the example
     void print() {
+        cout << "\tResulting line:" << endl;
         Node* current = head;
         if (!current) {
-            cout << "Line is empty." << endl;
+            cout << "\t\tNo one is in line" << endl;
             return;
         }
-        cout << "\tResulting line:" << endl;
         while (current) {
-            cout << "\t" << current->data << endl;
+            cout << "\t\t" << current->data << endl;
             current = current->next;
         }
         cout << endl;
@@ -257,6 +257,15 @@ public:
         }
 
         return list;
+    }
+
+    // I noticed that people can still get served if the ilst is empty so i need to add something to check if list is empty before doing that
+    // empty(): returns a bool wether the lsit is empty or not
+    // argumetns: none
+    // return: bool
+    bool empty(){
+        // check wether the head is null or not
+        return head == nullptr;
     }
 };
 
@@ -351,9 +360,13 @@ int main() {
 
         // check if someone was served, 40% chance of this also create the chance variable for our probability checking
         chance = rand() % MAX + MIN;
-        if(chance <= SERVED){
+        // also check if line is empty before serving someone
+        if(chance <= SERVED && !line.empty()){
             // i needa make a function to get the front person and back persons name to display
             cout << "\t" << line.front_val() << " is served" << endl;
+
+            // serving should remove from the list
+            line.pop_front();
         }
 
         // check if someone new is joining
@@ -368,8 +381,9 @@ int main() {
         }
 
         // check if someone at the end wants to leave
+        // also check if line is empty before seeing if the person will leave
         chance = rand() % MAX + MIN;
-        if(chance <= END_LEAVE){
+        if(chance <= END_LEAVE && !line.empty()){
             cout << "\t" << line.back_val() << " (at the rear) left the line" << endl;
             // eliminate the person at the back
             line.pop_back();
