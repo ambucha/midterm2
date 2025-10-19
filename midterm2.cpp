@@ -214,7 +214,29 @@ public:
         cout << endl;
     }
 
-    // front_val():
+    // front_val(): gives me the person at the front of the lines name in order to display to user
+    // arguments: nothing
+    // return: string
+    string front_val(){
+        // check if list is empty
+        if(head == nullptr){
+            return "";
+        } 
+        // if not empty then return the string at the head
+        return head->data;
+    }
+    
+    // back_val(): gives me the name at the back of the line
+    // arguments: nothing
+    // return: string
+    string back_val(){
+        // check if list is empty
+        if(tail == nullptr){
+            return "";
+        }
+        // if not empty return the string at the back
+        return tail->data;
+    }
 };
 
 // names(): Start with a function to load names in from my given file
@@ -299,6 +321,18 @@ int main() {
         int chance = rand() % MAX + MIN;
         if(chance <= SERVED){
             // i needa make a function to get the front person and back persons name to display
+            cout << "\t" << line.front_val() << " is served" << endl;
+        }
+
+        // check if someone new is joining
+        chance = rand() % MAX + MIN;
+        if(chance <= JOIN){
+            // push back a new name from the list
+            line.push_back(nameList[index]);
+            index++;
+
+            // call the back_val function to get the new person who joined
+            cout << "\t" << line.back_val() << " joins the line" << endl;
         }
     }
     return 0;
