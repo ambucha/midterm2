@@ -2,6 +2,11 @@
 // IDE used : Visual Studio Code
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -206,8 +211,32 @@ public:
     }
 };
 
-int main() {
-    
+// names(): Start with a function to load names in from my given file
+// arguments: nothing
+// returns: vector of strings
+vector<string> names(){
+    vector<string> names;
+    ifstream file("names.txt");
+    string name;
 
+    // check if the file was found first
+    if(!file){
+        cout << "Error: File could not be opened";
+        return;
+    }
+
+    // Loop through and get names
+    while (getline(file, name)) {
+        // make sure that the name is valid
+        if (name != ""){
+             names.push_back(name);
+        }
+    }
+
+    return names;
+}
+
+int main() {
+    srand(time(0));
     return 0;
 }
